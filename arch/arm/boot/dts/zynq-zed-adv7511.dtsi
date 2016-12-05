@@ -223,5 +223,136 @@
 			label = "ld7:red";
 			gpios = <&gpio0 80 0>;
 		};
+
+		mmc_led {
+			label = "mmc_led";
+			gpios = <&gpio0 7 0>;
+			linux,default-trigger = "mmc0";
+		};
+	};
+
+	buttons {
+		compatible = "gpio-keys";
+		label = "buttons";
+		autorepeat;
+
+		up {
+			label = "GPIO Key UP";
+			linux,code = <103>;
+			gpios = <&gpio0 58 0>;
+		};
+
+		right {
+			label = "GPIO Key RIGHT";
+			linux,code = <106>;
+			gpios = <&gpio0 57 0>;
+		};
+
+		left {
+			label = "GPIO Key LEFT";
+			linux,code = <105>;
+			gpios = <&gpio0 56 0>;
+		};
+
+		down {
+			label = "GPIO Key DOWN";
+			linux,code = <108>;
+			gpios = <&gpio0 55 0>;
+		};
+
+		center {
+			label = "GPIO Key CENTER";
+			linux,code = <28>;
+			gpios = <&gpio0 54 0>;
+		};
+
+		a {
+			label = "GPIO Key A";
+			linux,code = <1>;
+			gpios = <&gpio0 50 0>;
+		};
+
+		b {
+			label = "GPIO Key B";
+			linux,code = <14>;
+			gpios = <&gpio0 51 0>;
+		};
+	};
+
+	switches {
+		compatible = "gpio-keys";
+		label = "switches";
+
+		sw0 {
+			label = "Switch 0";
+			linux,code = <11>;
+			gpios = <&gpio0 65 0>;
+		};
+
+		sw1 {
+			label = "Switch 1";
+			linux,code = <2>;
+			gpios = <&gpio0 66 0>;
+		};
+		sw2 {
+			label = "Switch 2";
+			linux,code = <3>;
+			gpios = <&gpio0 67 0>;
+		};
+
+		sw3 {
+			label = "Switch 3";
+			linux,code = <4>;
+			gpios = <&gpio0 68 0>;
+		};
+
+		sw4 {
+			label = "Switch 4";
+			linux,code = <5>;
+			gpios = <&gpio0 69 0>;
+		};
+
+		sw5 {
+			label = "Switch 5";
+			linux,code = <6>;
+			gpios = <&gpio0 70 0>;
+		};
+
+		sw6 {
+			label = "Switch 6";
+			linux,code = <7>;
+			gpios = <&gpio0 71 0>;
+		};
+
+		sw7 {
+			label = "Switch 7";
+			linux,code = <8>;
+			gpios = <&gpio0 72 0>;
+		};
+	};
+
+	spigpio {
+		compatible = "spi-gpio";
+		#address-cells = <0x1>;
+		#size-cells = <0>;
+
+		gpio-sck = <&gpio0 61 0>;
+		gpio-mosi = <&gpio0 62 0>;
+		num-chipselects = <0>;
+
+		/* clients */
+		oled@0 {
+			compatible = "dglnt,pmodoled-gpio";
+			reg = <0>;
+			/* GPIO Pins */
+			vbat-gpio = <&gpio0 63 0>;
+			vdd-gpio = <&gpio0 64 0>;
+			res-gpio = <&gpio0 60 0>;
+			dc-gpio = <&gpio0 59 0>;
+			/* SPI-GPIOs */
+			spi-max-frequency = <4000000>;
+			/* spi-sclk-gpio = <&gpio0 61 0>;
+			spi-sdin-gpio = <&gpio0 62 0>; */
+		};
 	};
 };
